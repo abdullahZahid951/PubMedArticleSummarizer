@@ -21,7 +21,7 @@ This project converts PubMed medical articles into summaries using the T5 model.
 
 ### Prerequisites
 
-- Anaconda distribution with Python 3.8 or higher
+- Anaconda distribution with Python 3.8 or higher installed.
 
 ### Setup
 
@@ -32,7 +32,7 @@ This project converts PubMed medical articles into summaries using the T5 model.
     cd pubmed-article-summarizer
     ```
 
-2. **Create a new Anaconda environment:**
+2. **Create a new Anaconda environment and activate it:**
 
     ```sh
     conda create --name pubmed_summarizer python=3.8
@@ -42,31 +42,37 @@ This project converts PubMed medical articles into summaries using the T5 model.
 3. **Install the required dependencies:**
 
     ```sh
-    conda install -c huggingface datasets
-    conda install -c conda-forge spacy
-    python -m spacy download en_core_web_sm
-    pip install torch torchvision torchaudio
-    conda install -c huggingface transformers
-    conda install -c conda-forge sentencepiece
+    conda install -c huggingface datasets  # For handling datasets
+    conda install -c conda-forge spacy     # For NLP tasks
+    python -m spacy download en_core_web_sm # Spacy English core model
+    pip install torch torchvision torchaudio  # PyTorch for deep learning
+    conda install -c huggingface transformers  # Hugging Face Transformers library
+    conda install -c conda-forge sentencepiece  # SentencePiece for tokenization
+    pip install streamlit
     ```
 
 ### Dependencies
 
-- `transformers` - Hugging Face library for natural language processing.
-- `torch` - PyTorch library for deep learning.
-- `requests` - Library for making HTTP requests (for fetching PubMed articles).
-- `beautifulsoup4` - Library for parsing HTML and XML documents (for scraping PubMed articles).
+- **`datasets`**: Provides an interface to handle datasets, which is useful for managing PubMed articles.
+  
+- **`spacy`**: A library for natural language processing tasks such as tokenization and language model loading. The `en_core_web_sm` model is downloaded for tokenization.
+
+- **`torch`, `torchvision`, `torchaudio`**: Libraries from PyTorch, a popular deep learning framework, used for building and training neural networks.
+
+- **`transformers`**: A library from Hugging Face providing pre-trained models and tools for natural language understanding tasks, including the T5 model.
+
+- **`sentencepiece`**: A library used for tokenization, particularly suited for models like T5 that employ subword tokenization.
+
+These dependencies are crucial for the project's functionality, enabling tasks such as data handling, text processing, model training, and inference.
 
 ## Usage
 
-You have two options to use the summarizer:
-
 ### Option 1: Using a Pre-trained Model
 
-1. **Download the pre-trained model:**
+1. **Download the pre-trained model (`fine_tuned_t5_model`):**
 
-    - Download the pre-trained model folder (`fine_tuned_t5_model`) and place it in the main directory of your device (for example for windows C Drive).
-    - And after doing you simply run the python script called
+    - Download the pre-trained model folder and place it in the main directory of your device.
+    - Then run app.py file with `streamlit run app.py` 
 
 2. **Activate the Anaconda environment (if not already activated):**
 
@@ -77,12 +83,12 @@ You have two options to use the summarizer:
 3. **Run the summarizer script:**
 
     ```sh
-    python summarize.py --input path/to/pubmed_article.txt --output path/to/summary.txt --model_dir t5_pretrained
+    python summarize.py --input path/to/pubmed_article.txt --output path/to/summary.txt --model_dir fine_tuned_t5_model
     ```
 
-- `--input` : Path to the input file containing the PubMed article.
-- `--output` : Path to the output file where the summary will be saved.
-- `--model_dir` : Path to the directory containing the pre-trained model.
+    - `--input` : Path to the input file containing the PubMed article.
+    - `--output` : Path to the output file where the summary will be saved.
+    - `--model_dir` : Path to the directory containing the pre-trained model.
 
 ### Option 2: Running and Tuning the Model via Jupyter Notebook
 
@@ -98,7 +104,7 @@ You have two options to use the summarizer:
     jupyter notebook
     ```
 
-3. **Open and run the provided notebook:**
+3. **Open and run the provided notebook (`summarize.ipynb`):**
 
     - Navigate to the `pubmed-article-summarizer` directory in Jupyter Notebook.
     - Open `summarize.ipynb`.
