@@ -1,6 +1,6 @@
 # PubMed Article Summarizer
 
-This project converts PubMed medical articles into summaries using the T5 model. It allows users to input PubMed articles and get concise abstracts as output.
+This project converts PubMed medical articles into summaries using the T5 model. It allows users to input PubMed articles and get concise abstracts as output. I have coded the whole experience of training, fine tunning, testion the model.
 
 ## Table of Contents
 
@@ -8,7 +8,7 @@ This project converts PubMed medical articles into summaries using the T5 model.
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
-- [License](#license)
+- [Request](#request)
 - [Acknowledgements](#acknowledgements)
 
 ## Features
@@ -16,6 +16,9 @@ This project converts PubMed medical articles into summaries using the T5 model.
 - Converts PubMed articles into concise summaries.
 - Utilizes the T5 model for natural language processing.
 - Easy to use with a simple command-line interface.
+- Can increase the model performnce as you wish.
+- If you have low compute you can also use the model configuration file uploaded here.
+- Also a sophisticated Web-based App for this venture.
 
 ## Installation
 
@@ -77,19 +80,12 @@ These dependencies are crucial for the project's functionality, enabling tasks s
 2. **Activate the Anaconda environment (if not already activated):**
 
     ```sh
-    conda activate pubmed_summarizer
+    conda activate pubmed_summarizer(or whatever the name is)
     ```
 
-3. **Run the summarizer script:**
+3. **Run the PubMedSummarizationUsingPython.ipynb script:**
 
-    ```sh
-    python summarize.py --input path/to/pubmed_article.txt --output path/to/summary.txt --model_dir fine_tuned_t5_model
-    ```
-
-    - `--input` : Path to the input file containing the PubMed article.
-    - `--output` : Path to the output file where the summary will be saved.
-    - `--model_dir` : Path to the directory containing the pre-trained model.
-
+    
 ### Option 2: Running and Tuning the Model via Jupyter Notebook
 
 1. **Activate the Anaconda environment (if not already activated):**
@@ -109,6 +105,7 @@ These dependencies are crucial for the project's functionality, enabling tasks s
     - Navigate to the `pubmed-article-summarizer` directory in Jupyter Notebook.
     - Open `summarize.ipynb`.
     - Follow the instructions in the notebook to configure settings, tune the model, and summarize a PubMed article.
+4. **Then run `streamlit run app.py`**
 
 ## Contributing
 
@@ -120,9 +117,12 @@ Contributions are welcome! Please follow these steps:
 4. Push to the branch (`git push origin feature-branch`).
 5. Create a new Pull Request.
 
-## License
+## Request
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+- As you can see this model has been trained on a very limited dataset if you have high computing power generate new
+fine_tuned_t5_model folder and replace it with older one here to imrove model computing power.
+- You can do that by increaing training testing and validation set to more than 500.
+
 
 ## Acknowledgements
 
