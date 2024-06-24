@@ -24,7 +24,7 @@ def cleanText(text):
     text = re.sub(r'http\S+|www.\S+', '', text)
     text = re.sub(r'\S+@\S+', '', text)
     text = re.sub(r'\d+', '', text)
-    text = text.lower()
+    
     return text.strip()
 
 def removeStopwordsAndLemmatize(text):
@@ -47,29 +47,57 @@ def generateSummary(article_text):
     return summary
 
 def main():
-    st.title('PubMed Article Summarizer')
-
-    option = st.sidebar.selectbox(
-        'Choose an option:',
-        ('Summarize Text', 'Upload and Summarize')
+    st.set_page_config(page_title='PubMed Article Summarizer', page_icon='📝', layout='wide')
+    st.title('📝 PubMed Article Summarizer')
+    st.markdown(
+        """
+        <style>
+        .reportview-container {
+            background: #f0f2f6;
+        }
+        .sidebar .sidebar-content {
+            background: #f0f2f6;
+        }
+        .stButton>button {
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 12px;
+            padding: 10px 24px;
+            font-size: 16px;
+        }
+        .stButton>button:hover {
+            background-color: #45a049;
+        }
+        .stTextArea textarea {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+        }
+        </style>
+        """, unsafe_allow_html=True
     )
+
+    option = st.sidebar.radio('Choose an option:', ('Summarize Text', 'Upload and Summarize'))
 
     if option == 'Summarize Text':
         st.header('Enter Article Text:')
         article_text = st.text_area('Input your article here:', height=200)
         if st.button('Summarize'):
-            summary = generateSummary(article_text)
+            with st.spinner('Generating summary...'):
+                summary = generateSummary(article_text)
             st.subheader('Summary:')
-            st.write(summary)
+            st.success(summary)
 
     elif option == 'Upload and Summarize':
         st.header('Upload PubMed File:')
         uploaded_file = st.file_uploader('Choose a file:', type=['txt'])
         if uploaded_file is not None:
             article_text = uploaded_file.read().decode('utf-8')
-            summary = generateSummary(article_text)
+            with st.spinner('Generating summary...'):
+                summary = generateSummary(article_text)
             st.subheader('Summary:')
-            st.write(summary)
+            st.success(summary)
 
 if __name__ == '__main__':
     main()
